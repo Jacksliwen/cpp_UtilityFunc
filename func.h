@@ -5,15 +5,15 @@
 #include <vector>
 
 // 根据网卡名获取本机ip
-std::string GetLocalIp(const char *ethinf);
+std::string GetLocalIp(const char* ethinf);
 
 //获取程序运行路径,以及进程名
-size_t GetModulePath(char *processdir, char *processname, size_t len);
+size_t GetModulePath(char* processdir, char* processname, size_t len);
 
 // base64编编码相关----------
-std::string Base64Encode(unsigned char const *bytes_to_encode,
-                         unsigned int in_len);
-std::string Base64Decode(std::string const &encoded_string);
+std::string Base64Encode(unsigned char const* bytes_to_encode,
+  unsigned int in_len);
+std::string Base64Decode(std::string const& encoded_string);
 
 //时间相关------------------
 //时间戳(秒)转YYYY-MM-DDTHH:mm:SS.000Z
@@ -33,8 +33,16 @@ std::string GetDateFromTimestamp(time_t time);
 
 //计算end -start花费时间
 double CalculationTimeCosted(std::chrono::system_clock::time_point start,
-                             std::chrono::system_clock::time_point end);
+  std::chrono::system_clock::time_point end);
 
 //系统信号处理相关-------------
 //程序收到非core信号，不直接退出，指定退出函数
 bool initSignal();
+
+/*
+  @brief 终端打印进度条 [#######     ]  50.89%
+  @param index 当前数字
+  @param maxNum  总数量
+  @param scheduleLength 进度条长度
+*/
+void PrintSchedule(int index, int maxNum, int scheduleLength);
