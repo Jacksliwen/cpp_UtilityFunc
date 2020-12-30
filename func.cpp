@@ -245,3 +245,23 @@ void PrintSchedule(int index, int maxNum, int scheduleLength)
   cout << "[" + string(pa, '#') + string(scheduleLength - pa, ' ') << "]  " << a * 100 << "%" << endl;
   fflush(stdout); // 刷新缓冲区
 }
+
+bool FileExist(const std::string& name) {
+  struct stat buffer;
+  return (stat(name.c_str(), &buffer) == 0);
+}
+
+char* ReadImage(std::string picPath, int& length) {
+  std::ifstream is(picPath.c_str(), std::ifstream::in);
+  if (!is.is_open()) {
+    std::cout << "Open " << picPath.c_str() << " falied.\n";
+    return nullptr;
+  }
+  is.seekg(0, is.end);
+  length = is.tellg();
+  is.seekg(0, is.beg);
+  char* buffer = new char[length];
+  is.read(buffer, length);
+  is.close();
+  return buffer;
+}

@@ -1,9 +1,10 @@
+#include <sys/stat.h>
+
 #include <chrono>
 #include <iostream>
 #include <memory>
 #include <string>
 #include <vector>
-
 // 根据网卡名获取本机ip
 std::string GetLocalIp(const char* ethinf);
 
@@ -46,3 +47,9 @@ bool initSignal();
   @param scheduleLength 进度条长度
 */
 void PrintSchedule(int index, int maxNum, int scheduleLength);
+
+//文件是否存在
+bool FileExist(const std::string& name);
+
+//读取图片二进制数据
+char* ReadImage(std::string picPath, int& length);
