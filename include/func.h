@@ -53,3 +53,6 @@ bool FileExist(const std::string& name);
 
 //读取图片二进制数据
 char* ReadImage(std::string picPath, int& length);
+
+//判断图片类型
+std::string CheckImageType(unsigned char* imagebuf);
