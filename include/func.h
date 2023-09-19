@@ -46,7 +46,7 @@ bool initSignal();
   @param maxNum  总数量
   @param scheduleLength 进度条长度
 */
-void PrintSchedule(int index, int maxNum, int scheduleLength);
+void PrintSchedule(int index, int maxNum);
 
 //文件是否存在
 bool FileExist(const std::string& name);
