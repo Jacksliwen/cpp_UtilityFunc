@@ -237,17 +237,34 @@ double CalculationTimeCosted(std::chrono::system_clock::time_point start,
          std::chrono::microseconds::period::den;
 }
 
-void PrintSchedule(int index, int maxNum, int scheduleLength) {
-  cout << setiosflags(ios::fixed) << setprecision(2);
-  float a = (float)index / (float)maxNum;
+void PrintSchedule(int index, int maxNum) {
+  auto scheduleLength = getTerminalWidth() - 11; 
+  // Prevent division by zero
+  if (maxNum == 0 || index > maxNum) {
+    cout << "[Error: maxNum or maxNum set num is .]" << endl;
+    return;
+  }
 
-  // 整体放大
-  int pa = a * scheduleLength;
-  cout << "\33[1A";  // 终端光标向上移动一行
+  // Calculate the percentage
+  float a = static_cast<float>(index) / static_cast<float>(maxNum);
+  
+  // Scale the percentage to the schedule length
+  int pa = static_cast<int>(a * scheduleLength);
+
+  // Prevent the progress bar from exceeding the schedule length
+  if (pa > scheduleLength) {
+    pa = scheduleLength;
+  }
+
+  // Print the progress bar
+  cout << "\33[1A";  // Move cursor up one line
   cout << "[" + string(pa, '#') + string(scheduleLength - pa, ' ') << "]  "
-       << a * 100 << "%" << endl;
-  fflush(stdout);  // 刷新缓冲区
+       << setiosflags(ios::fixed) << setprecision(2) << a * 100 << "%" << endl;
+  
+  // Flush the output
+  cout.flush();
 }
+
 
 bool FileExist(const std::string& name) {
   struct stat buffer;
