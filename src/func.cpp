@@ -236,6 +236,12 @@ double CalculationTimeCosted(std::chrono::system_clock::time_point start,
   return double(duration.count()) * std::chrono::microseconds::period::num /
          std::chrono::microseconds::period::den;
 }
+#include <sys/ioctl.h>
+int getTerminalWidth() {
+  struct winsize w;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+  return w.ws_col;
+}
 
 void PrintSchedule(int index, int maxNum) {
   auto scheduleLength = getTerminalWidth() - 11; 
