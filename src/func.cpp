@@ -245,31 +245,23 @@ int getTerminalWidth() {
 
 void PrintSchedule(int index, int maxNum) {
   auto scheduleLength = getTerminalWidth() - 11; 
-  // Prevent division by zero
   if (maxNum == 0 || index > maxNum) {
-    cout << "[Error: maxNum or maxNum set num is .]" << endl;
     return;
   }
 
-  // Calculate the percentage
   float a = static_cast<float>(index) / static_cast<float>(maxNum);
-  
-  // Scale the percentage to the schedule length
   int pa = static_cast<int>(a * scheduleLength);
 
-  // Prevent the progress bar from exceeding the schedule length
   if (pa > scheduleLength) {
     pa = scheduleLength;
   }
 
-  // Print the progress bar
   cout << "\33[1A";  // Move cursor up one line
   cout << "[" + string(pa, '#') + string(scheduleLength - pa, ' ') << "]  "
        << setiosflags(ios::fixed) << setprecision(2) << a * 100 << "%" << endl;
-  
-  // Flush the output
   cout.flush();
 }
+
 
 
 bool FileExist(const std::string& name) {
