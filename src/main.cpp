@@ -3,10 +3,16 @@
 #include <iostream>
 
 #include "func.h"
+#include "process_bar.h"
+
+using namespace cpp_utilit;
+
 int main(int argc, char** argv) {
   initSignal();
 
   std::cout << "ip: " << GetLocalIp("em1") << std::endl;
+
+  ProgressBars_Test();
 
   //--------------------
 #define MAX_PATH 260
