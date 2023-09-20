@@ -14,6 +14,8 @@
 #include <iomanip>
 #include <iostream>
 using namespace std;
+
+namespace cpp_utilit {
 inline void terminate(int signal, siginfo_t* info, void* data) {
   std::cout << "shutdown recv signal[" << signal << "]" << std::endl;
   struct sigaction action;
@@ -59,7 +61,7 @@ std::string GetLocalIp(const char* ethinf) {
   do {
     int sd = socket(AF_INET, SOCK_DGRAM, 0);
     if (-1 == sd) {
-      printf("[%d:%d]socket error: %s", __FUNCTION__, __LINE__,
+      printf("[%s:%d]socket error: %s", __FUNCTION__, __LINE__,
              strerror(errno));
       break;
     }
@@ -68,7 +70,7 @@ std::string GetLocalIp(const char* ethinf) {
 
     // if error: No such device
     if (ioctl(sd, SIOCGIFADDR, &ifr) < 0) {
-      printf("[%d:%d]ioctl error:%s", __FUNCTION__, __LINE__, strerror(errno));
+      printf("[%s:%d]ioctl error:%s", __FUNCTION__, __LINE__, strerror(errno));
       close(sd);
       break;
     }
@@ -296,3 +298,5 @@ std::string CheckImageType(unsigned char* imagebuf) {
       return IMAGE_NO_TYPE;
   }
 }
+
+}  // namespace cpp_utilit
