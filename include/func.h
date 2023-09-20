@@ -40,14 +40,6 @@ double CalculationTimeCosted(std::chrono::system_clock::time_point start,
 //程序收到非core信号，不直接退出，指定退出函数
 bool initSignal();
 
-/*
-  @brief 终端打印进度条 [#######     ]  50.89%
-  @param index 当前数字
-  @param maxNum  总数量
-  @param scheduleLength 进度条长度
-*/
-void PrintSchedule(int index, int maxNum);
-
 //文件是否存在
 bool FileExist(const std::string& name);
 
