@@ -243,27 +243,6 @@ int getTerminalWidth() {
   return w.ws_col;
 }
 
-void PrintSchedule(int index, int maxNum) {
-  auto scheduleLength = getTerminalWidth() - 11; 
-  if (maxNum == 0 || index > maxNum) {
-    return;
-  }
-
-  float a = static_cast<float>(index) / static_cast<float>(maxNum);
-  int pa = static_cast<int>(a * scheduleLength);
-
-  if (pa > scheduleLength) {
-    pa = scheduleLength;
-  }
-
-  cout << "\33[1A";  // Move cursor up one line
-  cout << "[" + string(pa, '#') + string(scheduleLength - pa, ' ') << "]  "
-       << setiosflags(ios::fixed) << setprecision(2) << a * 100 << "%" << endl;
-  cout.flush();
-}
-
-
-
 bool FileExist(const std::string& name) {
   struct stat buffer;
   return (stat(name.c_str(), &buffer) == 0);
