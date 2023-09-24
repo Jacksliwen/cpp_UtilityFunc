@@ -51,6 +51,18 @@ class QueueBuffer {
     }
   }
 
+  void BatchGet(std::vector<std::shared_ptr<T>> &values, int batch_size) {
+    do {
+      std::unique_lockstd::mutex lck(mtx_);
+      cond_get_.wait(lck, [this]() { return !this->data_.empty(); });
+      for (int i = 0; i < batch_size; ++i) {
+        values.push_back(std::move(data_.front()));
+        data_.pop();
+      }
+      cond_put_.notify_one();
+    } while (0);
+  }
+
  private:
   int max_size_;
   std::queue<std::shared_ptr<T>> data_;

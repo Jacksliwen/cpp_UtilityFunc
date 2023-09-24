@@ -26,15 +26,7 @@ void ProgressBar::Increment(int value) {
   }
 }
 
-void ProgressBar::SetSchedule(int schedule) {
-  index_ = schedule;
-  if (index_ > max_num_) {
-    index_.store(max_num_);
-    is_finished_.store(true);
-  }
-}
-
-void ProgressBars::AddBar(ProgressBar* bar) { bars.push_back(bar); }
+void ProgressBars::AddBar(ProgressBar* bar) { bars.emplace_back(bar); }
 
 void ProgressBars::Print() {
   for (int i = 0; i < bars.size(); i++) {
